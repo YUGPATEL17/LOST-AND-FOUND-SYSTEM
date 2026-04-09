@@ -102,28 +102,28 @@ The system has been tested for:
 ---
 
 📊 System Workflow
-	-	User registers and logs in
-	-	User reports lost or found item
-	-	Data is stored in database
-	-	System compares items using matching logic
-	-	If a match is found, a notification is shown
-	-	User views matches in dashboard
+	- User registers and logs in
+	- User reports lost or found item
+	- Data is stored in database
+	- System compares items using matching logic
+	- If a match is found, a notification is shown
+	- User views matches in dashboard
 
 ---
 
 ⚠️ Limitations
-	-	Matching is based on basic logic
-	-	No image-based matching
-	-	No real-time notifications
-	-	Requires manual refresh
+	- Matching is based on basic logic
+	- No image-based matching
+	- No real-time notifications
+	- Requires manual refresh
 
 ---
 🚀 Future Improvements
-	-   Add image upload feature
-	-	Improve matching using AI
-	-	Email or push notifications
-	-   Admin panel for verification
-	-   Mobile-friendly design
+	- Add image upload feature
+	- Improve matching using AI
+	- Email or push notifications
+	- Admin panel for verification
+	- Mobile-friendly design
 
 ---
 👨‍💻 Author
