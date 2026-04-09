@@ -1,78 +1,101 @@
 <?php
-session_start();
-require_once "config.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-if(!isset($_SESSION['user_id'])){
+session_start();
+require "config.php";
+
+if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
 }
 
-// SHOW ERRORS (VERY IMPORTANT FOR DEBUG)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-?>
+$success = "";
+$error = "";
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Report Found Item</title>
-</head>
-<body>
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-<h2>Report Found Item</h2>
-
-<?php
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-    $user_id = $_SESSION['user_id'];
-    $item_name = $_POST['item_name'];
-    $category = $_POST['category'];
-    $description = $_POST['description'];
-    $location_found = $_POST['location_found'];
-    $date_found = $_POST['date_found'];
+    $user_id = $_SESSION["user_id"];
+    $item_name = $_POST["item_name"];
+    $category = $_POST["category"];
+    $description = $_POST["description"];
+    $location = $_POST["location"];
+    $date_found = $_POST["date_found"];
 
     $sql = "INSERT INTO found_items 
-            (user_id, item_name, category, description, location_found, date_found, status)
-            VALUES 
-            ('$user_id', '$item_name', '$category', '$description', '$location_found', '$date_found', 'open')";
+    (user_id, item_name, category, description, location_found, date_found, status) 
+    VALUES 
+    ('$user_id', '$item_name', '$category', '$description', '$location', '$date_found', 'open')";
 
-    if($conn->query($sql) === TRUE){
-        echo "<p style='color:green;'>✅ Found item reported successfully!</p>";
+    if (mysqli_query($conn, $sql)) {
+        $success = "Found item reported successfully!";
     } else {
-        echo "<p style='color:red;'>❌ Error: ".$conn->error."</p>";
+        $error = "Error: " . mysqli_error($conn);
     }
 }
 ?>
 
-<!-- ✅ FORM MUST BE HERE -->
-<form method="POST">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Report Found - IFound MDX</title>
 
-    Item Name:
-    <input type="text" name="item_name" required><br><br>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
 
-    Category:
-    <select name="category">
-        <option>Electronics</option>
-        <option>Clothing</option>
-        <option>Documents</option>
-        <option>Others</option>
-    </select><br><br>
+<body>
 
-    Description:<br>
-    <textarea name="description"></textarea><br><br>
+<div class="navbar">
+    <div class="logo">IFound <span>MDX</span></div>
 
-    Location Found:
-    <input type="text" name="location_found"><br><br>
+    <div class="nav-links">
+        <a href="dashboard.php">Dashboard</a>
+        <a href="report_lost.php">Report Lost</a>
+        <a href="report_found.php">Report Found</a>
+        <a href="matches.php">Matches</a>
+        <a href="logout.php">Logout</a>
+    </div>
+</div>
 
-    Date Found:
-    <input type="date" name="date_found"><br><br>
+<div class="hero">
+    <div class="form-card">
 
-    <button type="submit">Submit</button>
+        <h2>Report Found Item</h2>
 
-</form>
+        <?php if ($success != "") { ?>
+            <p class="success"><?php echo $success; ?></p>
+        <?php } ?>
 
-<br>
-<a href="dashboard.php">⬅ Back to Dashboard</a>
+        <?php if ($error != "") { ?>
+            <p class="error"><?php echo $error; ?></p>
+        <?php } ?>
+
+        <form method="POST" class="form-spacing">
+
+            <input type="text" name="item_name" placeholder="Item Name" required>
+
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option>Electronics</option>
+                <option>Documents</option>
+                <option>Accessories</option>
+                <option>Other</option>
+            </select>
+
+            <textarea name="description" placeholder="Description" required></textarea>
+
+            <input type="text" name="location" placeholder="Location Found (e.g., Library, MDX House)" required>
+
+            <input type="date" name="date_found" required>
+
+            <button type="submit" class="btn primary">Submit</button>
+
+        </form>
+
+    </div>
+</div>
 
 </body>
-</html>Thank you. 
+</html>

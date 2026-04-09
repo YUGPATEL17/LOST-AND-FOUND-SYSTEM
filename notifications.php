@@ -12,7 +12,6 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = $_SESSION["user_id"];
 
-/* GET MATCH COUNT */
 $sql = "
 SELECT COUNT(*) as total
 FROM lost_items l
@@ -24,14 +23,14 @@ WHERE l.user_id = '$user_id'
 
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
-$total_matches = $row["total"];
+$total = $row["total"];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Dashboard - IFound MDX</title>
+<title>Notifications - IFound MDX</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -55,23 +54,9 @@ $total_matches = $row["total"];
 <div class="hero">
     <div class="form-card">
 
-        <h2>Welcome to Dashboard 👋</h2>
-        <p>Manage your lost and found items easily.</p>
+        <h2>Notifications 🔔</h2>
 
-        <!-- 🔔 NOTIFICATION -->
-        <?php if ($total_matches > 0) { ?>
-            <div class="notification-box">
-                🔔 You have <strong><?php echo $total_matches; ?></strong> possible matches!
-                <br><br>
-                <a href="matches.php" class="btn primary">View Matches</a>
-            </div>
-        <?php } ?>
-
-        <br>
-
-        <a href="report_lost.php" class="btn primary">Report Lost Item</a>
-
-        <a href="report_found.php" class="btn secondary">Report Found Item</a>
+        <p>You have <strong><?php echo $total; ?></strong> possible matches.</p>
 
         <a href="matches.php" class="btn primary">View Matches</a>
 

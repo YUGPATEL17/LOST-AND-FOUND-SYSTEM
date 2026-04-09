@@ -1,62 +1,101 @@
 <?php
-session_start();
-require_once "config.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-if(!isset($_SESSION['user_id'])){
+session_start();
+require "config.php";
+
+if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
 }
 
-if(isset($_POST['submit'])){
+$success = "";
+$error = "";
 
-$user_id = $_SESSION['user_id'];
-$item_name = $_POST['item_name'];
-$category = $_POST['category'];
-$description = $_POST['description'];
-$location = $_POST['location'];
-$date = $_POST['date'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-$sql = "INSERT INTO lost_items (user_id, item_name, category, description, location_lost, date_lost)
-VALUES ('$user_id','$item_name','$category','$description','$location','$date')";
+    $user_id = $_SESSION["user_id"];
+    $item_name = $_POST["item_name"];
+    $category = $_POST["category"];
+    $description = $_POST["description"];
+    $location = $_POST["location"];
+    $date_lost = $_POST["date_lost"];
 
-if($conn->query($sql)){
-    echo "Lost item reported successfully!";
-}else{
-    echo "Error: ".$conn->error;
-}
+    $sql = "INSERT INTO lost_items 
+    (user_id, item_name, category, description, location_lost, date_lost, status) 
+    VALUES 
+    ('$user_id', '$item_name', '$category', '$description', '$location', '$date_lost', 'open')";
 
+    if (mysqli_query($conn, $sql)) {
+        $success = "Lost item reported successfully!";
+    } else {
+        $error = "Error: " . mysqli_error($conn);
+    }
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Report Lost - IFound MDX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+
 <body>
 
-<h2>Report Lost Item</h2>
+<div class="navbar">
+    <div class="logo">IFound <span>MDX</span></div>
 
-<form method="POST">
+    <div class="nav-links">
+        <a href="dashboard.php">Dashboard</a>
+        <a href="report_lost.php">Report Lost</a>
+        <a href="report_found.php">Report Found</a>
+        <a href="matches.php">Matches</a>
+        <a href="logout.php">Logout</a>
+    </div>
+</div>
 
-Item Name: <input type="text" name="item_name" required><br><br>
+<div class="hero">
+    <div class="form-card">
 
-Category:
-<select name="category">
-    <option>Electronics</option>
-    <option>Wallet</option>
-    <option>Keys</option>
-    <option>Documents</option>
-    <option>Other</option>
-</select><br><br>
+        <h2>Report Lost Item</h2>
 
-Description:<br>
-<textarea name="description"></textarea><br><br>
+        <?php if ($success != "") { ?>
+            <p class="success"><?php echo $success; ?></p>
+        <?php } ?>
 
-Location Lost: <input type="text" name="location"><br><br>
+        <?php if ($error != "") { ?>
+            <p class="error"><?php echo $error; ?></p>
+        <?php } ?>
 
-Date Lost: <input type="date" name="date"><br><br>
+        <form method="POST" class="form-spacing">
 
-<button name="submit">Submit</button>
+            <input type="text" name="item_name" placeholder="Item Name" required>
 
-</form>
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option>Electronics</option>
+                <option>Documents</option>
+                <option>Accessories</option>
+                <option>Other</option>
+            </select>
+
+            <textarea name="description" placeholder="Description" required></textarea>
+
+            <input type="text" name="location" placeholder="Location (e.g., Library, MDX House)" required>
+
+            <input type="date" name="date_lost" required>
+
+            <button type="submit" class="btn primary">Submit</button>
+
+        </form>
+
+    </div>
+</div>
 
 </body>
 </html>
