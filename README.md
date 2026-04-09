@@ -88,6 +88,8 @@ Open your browser and go to:
 
 http://localhost/lost_found_system
 
+---
+
 🧪 Testing
 
 The system has been tested for:
@@ -97,6 +99,8 @@ The system has been tested for:
 	-	Notifications
 	-	Multi-user usage
 
+---
+
 📊 System Workflow
 	-	User registers and logs in
 	-	User reports lost or found item
@@ -105,12 +109,15 @@ The system has been tested for:
 	-	If a match is found, a notification is shown
 	-	User views matches in dashboard
 
+---
+
 ⚠️ Limitations
 	-	Matching is based on basic logic
 	-	No image-based matching
 	-	No real-time notifications
 	-	Requires manual refresh
 
+---
 🚀 Future Improvements
 	-   Add image upload feature
 	-	Improve matching using AI
@@ -118,8 +125,7 @@ The system has been tested for:
 	-   Admin panel for verification
 	-   Mobile-friendly design
 
-
-
+---
 👨‍💻 Author
 
  - Yug Patel
