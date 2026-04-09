@@ -1,34 +1,39 @@
+/* 🔹 RESET DEFAULT STYLING (remove browser default margins & padding) */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* ensures padding doesn't affect width */
 }
 
+/* 🔹 GLOBAL BODY STYLING */
 body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #FFE9E9, #EDF7EB);
-    color: #1A1A1A;
+    font-family: 'Poppins', sans-serif; /* modern readable font */
+    background: linear-gradient(to right, #FFE9E9, #EDF7EB); /* soft gradient background */
+    color: #1A1A1A; /* main text color */
 }
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 .navbar {
-    display: flex;
-    justify-content: space-between;
+    display: flex; /* horizontal layout */
+    justify-content: space-between; /* space between logo and links */
     align-items: center;
     padding: 20px 60px;
     background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* subtle shadow for depth */
 }
 
+/* 🔹 Logo styling */
 .logo {
     font-size: 22px;
     font-weight: 600;
 }
 
+/* 🔹 Highlight part of logo */
 .logo span {
-    color: #2E7D32;
+    color: #2E7D32; /* green theme */
 }
 
+/* 🔹 Navigation links */
 .nav-links a {
     margin-left: 25px;
     text-decoration: none;
@@ -36,18 +41,19 @@ body {
     font-weight: 500;
 }
 
+/* 🔹 Hover effect */
 .nav-links a:hover {
     color: #2E7D32;
 }
 
-/* HERO */
+/* ================= HERO SECTION ================= */
 .hero {
     display: flex;
     justify-content: center;
     padding: 100px 20px;
 }
 
-/* HERO CARD */
+/* 🔹 Main card in hero section */
 .hero-card {
     background: white;
     padding: 50px;
@@ -57,21 +63,26 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
+/* 🔹 Main heading */
 .hero-card h1 {
     font-size: 42px;
     margin-bottom: 20px;
 }
 
+/* 🔹 Highlight text */
 .hero-card span {
     color: #2E7D32;
 }
 
+/* 🔹 Description text */
 .hero-card p {
     color: #6B7280;
     margin-bottom: 30px;
 }
 
-/* BUTTON BASE */
+/* ================= BUTTON STYLING ================= */
+
+/* 🔹 Base button style */
 .btn {
     display: block;
     width: 100%;
@@ -81,32 +92,34 @@ body {
     text-align: center;
     text-decoration: none;
     font-weight: 500;
-    transition: 0.3s;
+    transition: 0.3s; /* smooth hover effect */
 }
 
-/* PRIMARY BUTTON */
+/* 🔹 Primary button (main action) */
 .primary {
     background: #2E7D32;
     color: white;
 }
 
+/* 🔹 Hover effect */
 .primary:hover {
     background: #256628;
 }
 
-/* SECONDARY BUTTON (OUTLINE) */
+/* 🔹 Secondary button (outline style) */
 .secondary {
     border: 2px solid #2E7D32;
     color: #2E7D32;
     background: transparent;
 }
 
+/* 🔹 Hover effect */
 .secondary:hover {
     background: #2E7D32;
     color: white;
 }
 
-/* INFO SECTION */
+/* ================= INFO SECTION ================= */
 .info {
     padding: 60px 20px;
     text-align: center;
@@ -117,13 +130,15 @@ body {
     font-size: 28px;
 }
 
+/* 🔹 Cards container */
 .info-cards {
     display: flex;
     justify-content: center;
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* responsive layout */
 }
 
+/* 🔹 Individual card */
 .card {
     background: white;
     padding: 25px;
@@ -136,7 +151,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 .footer {
     margin-top: 60px;
     background: white;
@@ -149,12 +164,14 @@ body {
     margin: 5px 0;
 }
 
+/* 🔹 Copyright styling */
 .footer .copyright {
     margin-top: 10px;
     font-size: 13px;
     color: #777;
-} 
-/* FORM CARD */
+}
+
+/* ================= FORM CARD ================= */
 .form-card {
     background: white;
     padding: 40px;
@@ -168,6 +185,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* 🔹 Input fields */
 .form-card input {
     width: 100%;
     padding: 12px;
@@ -176,6 +194,7 @@ body {
     border: 1px solid #ddd;
 }
 
+/* 🔹 Focus effect */
 .form-card input:focus {
     outline: none;
     border-color: #2E7D32;
@@ -185,20 +204,25 @@ body {
     width: 100%;
 }
 
+/* 🔹 Error message */
 .error {
     color: red;
     margin-bottom: 10px;
 }
 
+/* 🔹 Small text (switch login/register) */
 .switch {
     margin-top: 15px;
     font-size: 14px;
 }
+
+/* 🔹 Success message */
 .success {
     color: green;
     margin-bottom: 10px;
 }
-/* DASHBOARD */
+
+/* ================= DASHBOARD ================= */
 .dashboard-card {
     background: white;
     padding: 40px;
@@ -217,11 +241,14 @@ body {
     color: #6B7280;
 }
 
+/* 🔹 Dashboard actions layout */
 .dashboard-actions {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+
+/* ================= FORM SPACING ================= */
 .form-spacing input,
 .form-spacing select,
 .form-spacing textarea {
@@ -233,18 +260,13 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+/* 🔹 Textarea styling */
 .form-spacing textarea {
     resize: none;
     height: 80px;
 }
-.match-card {
-    background: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    text-align: left;
-}
+
+/* ================= MATCH CARD ================= */
 .match-card {
     background: #fff;
     padding: 20px;
@@ -254,13 +276,16 @@ body {
     text-align: left;
 }
 
+/* 🔹 Center dashboard layout */
 .dashboard-card {
     width: 600px;
     margin: auto;
 }
+
+/* ================= NOTIFICATION BOX ================= */
 .notification-box {
-    background: #fff3cd;
-    border-left: 5px solid #ffc107;
+    background: #fff3cd; /* light yellow background */
+    border-left: 5px solid #ffc107; /* highlight border */
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 20px;
