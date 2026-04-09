@@ -1,6 +1,6 @@
-# 🎓 IFound MDX – Campus Lost & Found Matching System
+# IFound MDX – Campus Lost & Found Matching System
 
-## 📌 Overview
+## Overview
 
 IFound MDX is a web-based system developed to improve how lost and found items are handled within a university environment. Instead of relying on manual reporting or physical notice boards, this system allows users to report lost or found items digitally and automatically identifies possible matches.
 
@@ -8,7 +8,7 @@ The goal of the project is to make the recovery process faster, more reliable, a
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 - User registration and secure login system  
 - Report lost items with detailed information  
@@ -20,7 +20,7 @@ The goal of the project is to make the recovery process faster, more reliable, a
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **PHP** – Backend logic and server-side processing  
 - **MySQL** – Database management  
@@ -29,7 +29,7 @@ The goal of the project is to make the recovery process faster, more reliable, a
 
 ---
 
-## 💻 How to Run the Project
+## How to Run the Project
 
 This project is designed to run on a local server using XAMPP.
 
@@ -90,7 +90,7 @@ http://localhost/lost_found_system
 
 ---
 
-## 🧪 Testing
+## Testing
 
 The system has been tested for:
 
@@ -113,7 +113,7 @@ The system has been tested for:
 
 ---
 
-## ⚠️ Limitations
+## Limitations
 
 - Matching is based on basic logic  
 - No image-based matching  
@@ -122,7 +122,7 @@ The system has been tested for:
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 - Add image upload feature  
 - Improve matching using AI  
@@ -132,7 +132,7 @@ The system has been tested for:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 Yug Patel  
 M00958497  
