@@ -78,6 +78,8 @@ $host = "127.0.0.1";
 $user = "root";
 $password = "";
 $database = "lost_found_system";
+```
+
 
 
 ### Step 6: Run the Application
