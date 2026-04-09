@@ -90,44 +90,50 @@ http://localhost/lost_found_system
 
 ---
 
-🧪 Testing
+## 🧪 Testing
 
 The system has been tested for:
-	-	User registration and login
-	-	Reporting lost and found items
-	-	Matching functionality
-	-	Notifications
-	-	Multi-user usage
+
+- User registration and login  
+- Reporting lost and found items  
+- Matching functionality  
+- Notifications  
+- Multi-user usage  
 
 ---
 
-📊 System Workflow
-	- User registers and logs in
-	- User reports lost or found item
-	- Data is stored in database
-	- System compares items using matching logic
-	- If a match is found, a notification is shown
-	- User views matches in dashboard
+## 📊 System Workflow
+
+1. User registers and logs in  
+2. User reports lost or found item  
+3. Data is stored in database  
+4. System compares items using matching logic  
+5. If a match is found, a notification is shown  
+6. User views matches in dashboard  
 
 ---
 
-⚠️ Limitations
-	- Matching is based on basic logic
-	- No image-based matching
-	- No real-time notifications
-	- Requires manual refresh
+## ⚠️ Limitations
+
+- Matching is based on basic logic  
+- No image-based matching  
+- No real-time notifications  
+- Requires manual refresh  
 
 ---
-🚀 Future Improvements
-	- Add image upload feature
-	- Improve matching using AI
-	- Email or push notifications
-	- Admin panel for verification
-	- Mobile-friendly design
+
+## 🚀 Future Improvements
+
+- Add image upload feature  
+- Improve matching using AI  
+- Email or push notifications  
+- Admin panel for verification  
+- Mobile-friendly design  
 
 ---
-👨‍💻 Author
 
- - Yug Patel
- - M00958497
- - Final Year Project – Middlesex University
+## 👨‍💻 Author
+
+Yug Patel  
+M00958497  
+Final Year Project – Middlesex University  
