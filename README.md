@@ -102,7 +102,7 @@ The system has been tested for:
 
 ---
 
-## 📊 System Workflow
+## System Workflow
 
 1. User registers and logs in  
 2. User reports lost or found item  
