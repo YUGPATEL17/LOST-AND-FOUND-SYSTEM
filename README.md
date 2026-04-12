@@ -1,5 +1,15 @@
 # IFound MDX – Campus Lost & Found Matching System
 
+## 🔗 GitHub Repository
+
+Repository Link:  
+https://github.com/YUGPATEL17/LOST-AND-FOUND-SYSTEM
+
+ Description:  
+This repository contains the complete source code for the Campus Lost & Found Matching System developed as part of the CST3990 Final Year Project.
+
+# IFound MDX – Campus Lost & Found Matching System
+
 ## Overview
 
 IFound MDX is a web-based system developed to improve how lost and found items are handled within a university environment. Instead of relying on manual reporting or physical notice boards, this system allows users to report lost or found items digitally and automatically identifies possible matches.
