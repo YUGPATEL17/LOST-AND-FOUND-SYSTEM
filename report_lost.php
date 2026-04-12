@@ -1,59 +1,93 @@
 <?php
 
-// 🔹 Enable error reporting (useful during development/debugging)
+// 🔹 Enable error reporting (for debugging)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// 🔹 Start session to access logged-in user data
+// 🔹 Start session (to get logged-in user info)
 session_start();
 
 // 🔹 Include database connection
 require "config.php";
 
 // 🔹 Check if user is logged in
-// If not, redirect to login page (security)
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit();
 }
 
-// 🔹 Variables to store success/error messages
+// 🔹 Message variables
 $success = "";
 $error = "";
 
 // 🔹 Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // 🔹 Get current user ID from session
+    // 🔹 Get user ID from session
     $user_id = $_SESSION["user_id"];
 
-    // 🔹 Get form input values
+    // 🔹 Get form data
     $item_name = $_POST["item_name"];
     $category = $_POST["category"];
     $description = $_POST["description"];
     $location = $_POST["location"];
     $date_lost = $_POST["date_lost"];
 
-    /* 🔹 SQL query to insert lost item into database
-       - user_id → identifies who reported the item
-       - location_lost → where item was lost
-       - status → set to 'open' (not yet resolved)
-    */
-    $sql = "INSERT INTO lost_items 
-    (user_id, item_name, category, description, location_lost, date_lost, status) 
-    VALUES 
-    ('$user_id', '$item_name', '$category', '$description', '$location', '$date_lost', 'open')";
+    // =========================
+    // 🔥 FIXED IMAGE UPLOAD LOGIC
+    // =========================
 
-    // 🔹 Execute query
-    if (mysqli_query($conn, $sql)) {
+    // 🔹 Default empty image
+    $folder = "";
 
-        // 🔹 Success message if insertion is successful
-        $success = "Lost item reported successfully!";
+    // 🔹 Only run if image uploaded
+    if (!empty($_FILES["image"]["name"])) {
 
-    } else {
+        $image_name = $_FILES["image"]["name"];
+        $tmp_name = $_FILES["image"]["tmp_name"];
 
-        // 🔹 Error message if query fails
-        $error = "Error: " . mysqli_error($conn);
+        // 🔹 Allowed file types
+        $allowed_types = ["jpg", "jpeg", "png"];
+
+        // 🔹 Get file extension
+        $file_ext = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+
+        // 🔹 Validate file type
+        if (!in_array($file_ext, $allowed_types)) {
+
+            $error = "Only JPG, JPEG, PNG files are allowed!";
+
+        } else {
+
+            // 🔹 Create unique file name
+            $folder = "uploads/" . time() . "_" . $image_name;
+
+            // 🔹 Move file safely
+            if (!move_uploaded_file($tmp_name, $folder)) {
+                $error = "Image upload failed!";
+            }
+        }
+    }
+
+    // 🔹 Insert into DB ONLY if no error
+    if ($error == "") {
+
+        $sql = "INSERT INTO lost_items 
+        (user_id, item_name, category, description, location_lost, date_lost, status, image) 
+        VALUES 
+        ('$user_id', '$item_name', '$category', '$description', '$location', '$date_lost', 'open', '$folder')";
+
+        // 🔹 Execute query
+        if (mysqli_query($conn, $sql)) {
+
+            // 🔹 Success message
+            $success = "Lost item reported successfully!";
+
+        } else {
+
+            // 🔹 Database error
+            $error = "Error: " . mysqli_error($conn);
+        }
     }
 }
 ?>
@@ -62,22 +96,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
 
-<!-- 🔹 Character encoding -->
 <meta charset="UTF-8">
-
-<!-- 🔹 Page title -->
 <title>Report Lost - IFound MDX</title>
 
-<!-- 🔹 Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<!-- 🔹 External CSS -->
 <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
 
-<!-- 🔹 NAVIGATION BAR -->
+<!-- 🔹 NAVBAR -->
 <div class="navbar">
     <div class="logo">IFound <span>MDX</span></div>
 
@@ -90,29 +118,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
 
-<!-- 🔹 MAIN FORM SECTION -->
+<!-- 🔹 MAIN FORM -->
 <div class="hero">
     <div class="form-card">
 
         <h2>Report Lost Item</h2>
 
-        <!-- 🔹 Display success message -->
+        <!-- 🔹 Success Message -->
         <?php if ($success != "") { ?>
             <p class="success"><?php echo $success; ?></p>
         <?php } ?>
 
-        <!-- 🔹 Display error message -->
+        <!-- 🔹 Error Message -->
         <?php if ($error != "") { ?>
             <p class="error"><?php echo $error; ?></p>
         <?php } ?>
 
-        <!-- 🔹 Form for reporting lost item -->
-        <form method="POST" class="form-spacing">
+        <form method="POST" enctype="multipart/form-data" class="form-spacing">
 
-            <!-- 🔹 Item name -->
             <input type="text" name="item_name" placeholder="Item Name" required>
 
-            <!-- 🔹 Category selection -->
             <select name="category" required>
                 <option value="">Select Category</option>
                 <option>Electronics</option>
@@ -121,20 +146,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option>Other</option>
             </select>
 
-            <!-- 🔹 Description -->
             <textarea name="description" placeholder="Description" required></textarea>
 
-            <!-- 🔹 Location where item was lost -->
-            <input type="text" name="location" placeholder="Location (e.g., Library, MDX House)" required>
+            <input type="text" name="location" placeholder="Location" required>
 
-            <!-- 🔹 Date when item was lost -->
             <input type="date" name="date_lost" required>
 
-            <!-- 🔹 Submit button -->
+            <!-- 🔥 IMAGE NOW OPTIONAL -->
+            <input type="file" name="image">
+
             <button type="submit" class="btn primary">Submit</button>
 
         </form>
-
+            
     </div>
 </div>
 
